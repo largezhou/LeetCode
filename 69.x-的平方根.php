@@ -16,21 +16,25 @@ class Solution
      */
     public function mySqrt($x)
     {
-        if ($x == 0 || $x == 1) {
+        if ($x == 0) {
             return $x;
         }
 
-        $c = floor($x / 2);
-        $res = 1;
-        for ($i = 1; $i <= $c; $i++) {
-            if ($i * $i <= $x) {
-                $res = $i;
+        $left = 1;
+        $right = floor($x / 2);
+
+        while ($left < $right) {
+            // 一定要取偏右的中位，不然会进入死循环
+            $mid = $right - floor(($right - $left) / 2);
+
+            if ($mid * $mid > $x) {
+                $right = $mid - 1;
             } else {
-                break;
+                $left = $mid;
             }
         }
 
-        return $res;
+        return $left;
     }
 }
 // @lc code=end
