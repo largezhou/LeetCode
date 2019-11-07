@@ -20,21 +20,14 @@ class Solution
             return $x;
         }
 
-        $left = 1;
-        $right = floor($x / 2);
-
-        while ($left < $right) {
-            // 一定要取偏右的中位，不然会进入死循环
-            $mid = $right - floor(($right - $left) / 2);
-
-            if ($mid * $mid > $x) {
-                $right = $mid - 1;
-            } else {
-                $left = $mid;
+        $cur = 1;
+        while (true) {
+            $pre = $cur;
+            $cur = ($cur + $x / $cur) / 2;
+            if (abs($cur - $pre) < 1e-6) {
+                return (int) $cur;
             }
         }
-
-        return $left;
     }
 }
 // @lc code=end
