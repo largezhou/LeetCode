@@ -17,21 +17,20 @@ class Solution
     public function lengthOfLastWord($s)
     {
         $max = 0;
-        $pre = '';
+        // 表示是否出现过非空格字符
+        $firstLetter = false;
 
         $l = strlen($s);
-        for ($i = 0; $i < $l; $i++) {
+        for ($i = $l - 1; $i >= 0; $i--) {
             $v = $s[$i];
-
-            if ($v != ' ' && $pre == ' ') {
-                $max = 0;
-            }
-
             if ($v != ' ') {
                 $max++;
+                $firstLetter = true;
             }
-
-            $pre = $v;
+            //  如果是空格，且已经出现过非空格，则不需要再遍历了
+            elseif ($firstLetter) {
+                break;
+            }
         }
 
         return $max;
@@ -39,4 +38,4 @@ class Solution
 }
 // @lc code=end
 
-var_dump((new Solution())->lengthOfLastWord('b   a    '));
+var_dump((new Solution())->lengthOfLastWord('1 22 333'));
