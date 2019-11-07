@@ -28,11 +28,11 @@ class Solution
     {
         if (!$p && !$q) {
             return true;
-        } elseif ($p && $q && ($p->val == $q->val)) {
+        } elseif (!$p || !$q) {
+            return false;
+        } elseif ($p->val == $q->val) {
             return $this->isSameTree($p->left, $q->left) &&
                 $this->isSameTree($p->right, $q->right);
-        } else {
-            return false;
         }
     }
 }
