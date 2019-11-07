@@ -16,26 +16,24 @@ class Solution
      */
     public function maxSubArray($nums)
     {
-        $count = count($nums);
-        $max = null;
-        for ($i = 0; $i < $count; ++$i) {
-            $tmpMax = null;
-            $sum = 0;
-            for ($j = $i; $j < $count; ++$j) {
-                $sum += $nums[$j];
-                if (is_null($tmpMax) || ($sum > $tmpMax)) {
-                    $tmpMax = $sum;
-                }
-            }
+        $maxNum = $nums[0];
+        $tmp = $nums[0];
 
-            if (is_null($max) || ($tmpMax > $max)) {
-                $max = $tmpMax;
+        $count = count($nums);
+        for ($i = 1; $i < $count; ++$i) {
+            $v = $nums[$i];
+
+            if ($tmp > 0) { // 如果临时值大于 0，则继续往后累加
+                $tmp = $tmp + $v;
+            } else { // 如果小于 0 了，则没必要往后累加，重新从当前值开始累加
+                $tmp = $v;
             }
+            $maxNum = $maxNum > $tmp ? $maxNum : $tmp;
         }
 
-        return $max;
+        return $maxNum;
     }
 }
 // @lc code=end
 
-var_dump((new Solution())->maxSubArray([-2]));
+var_dump((new Solution())->maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
