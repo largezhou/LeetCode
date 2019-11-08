@@ -29,10 +29,6 @@ class Solution
             return true;
         }
 
-        if (!$root->left && !$root->right) {
-            return true;
-        }
-
         return $this->isSame($root->left, $root->right);
     }
 
