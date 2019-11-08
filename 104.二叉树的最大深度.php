@@ -25,18 +25,26 @@ class Solution
      */
     public function maxDepth($root)
     {
-        return $this->dig($root, 0);
-    }
+        if (!$root) {
+            return 0;
+        }
 
-    protected function dig($node, $depth)
-    {
-        if (!$node) {
-            return $depth;
-        } else {
-            return max(
-                $this->dig($node->left, $depth + 1),
-                $this->dig($node->right, $depth + 1)
-            );
+        $depth = 1;
+        $nodes = [$root];
+        while (true) {
+            $nextNodes = [];
+            foreach ($nodes as $n) {
+                $n->left && ($nextNodes[] = $n->left);
+                $n->right && ($nextNodes[] = $n->right);
+            }
+
+            if (empty($nextNodes)) {
+                return $depth;
+            } else {
+                $depth++;
+            }
+
+            $nodes = $nextNodes;
         }
     }
 }
