@@ -19,39 +19,13 @@
  * @return {ListNode}
  */
 var getIntersectionNode = function (headA, headB) {
-    var offset = 0;
     var a = headA;
     var b = headB;
-    var long = headA;
-    var short = headB;
-    while (a || b) {
-        if (!a || !b) {
-            offset++;
-
-            if (b) {
-                long = headB;
-                short = headA;
-            }
-        }
-        a = a && a.next;
-        b = b && b.next;
+    while (a != b) {
+        a = a ? a.next : headB;
+        b = b ? b.next : headA;
     }
 
-    while (long && short) {
-        if (offset > 0) {
-            offset--;
-            long = long.next;
-            continue;
-        }
-
-        if (long === short) {
-            return long;
-        } else {
-            long = long.next;
-            short = short.next;
-        }
-    }
-
-    return null;
+    return a;
 };
 // @lc code=end
