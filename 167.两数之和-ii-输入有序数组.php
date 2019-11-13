@@ -17,20 +17,18 @@ class Solution
      */
     public function twoSum($numbers, $target)
     {
-        $t = [];
-        $pre = null;
-        foreach ($numbers as $idx => $value) {
-            // 由于是升序的，所以可以提前结束
-            if (isset($pre) && ($pre > $target)) {
-                return [];
-            }
+        $start = 0;
+        $end = count($numbers) - 1;
 
-            if (isset($t[$target - $value])) {
-                return [$t[$target - $value] + 1, $idx + 1];
+        while ($start < $end) {
+            $sum = $numbers[$start] + $numbers[$end];
+            if ($sum == $target) {
+                return [++$start, ++$end];
+            } elseif ($sum < $target) {
+                $start++;
+            } else {
+                $end--;
             }
-
-            $t[$value] = $idx;
-            $pre = $value;
         }
 
         return [];
