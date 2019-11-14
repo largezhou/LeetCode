@@ -10,6 +10,9 @@
 class Solution
 {
     /**
+     * 做了 171 题（即这题的反过来转换）后，
+     * 发现这题就是 10 进制转 26 进制.
+     *
      * @param int $n
      *
      * @return string
