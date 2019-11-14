@@ -16,17 +16,15 @@ class Solution
      */
     public function majorityElement($nums)
     {
-        $min = floor(count($nums) / 2);
-        $t = [];
+        $count = 0;
+        $cur = null;
+
         foreach ($nums as $val) {
-            if (!isset($t[$val])) {
-                $t[$val] = 0;
-            }
-            $t[$val]++;
-            if ($t[$val] > $min) {
-                return $val;
-            }
+            $cur = $count ? $cur : $val;
+            $count += ($cur == $val) ? 1 : -1;
         }
+
+        return $cur;
     }
 }
 // @lc code=end
